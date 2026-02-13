@@ -74,12 +74,13 @@ const BlogPostDetail = ({ post }: BlogPostDetailProps) => {
               if (block._type === 'image' && block.asset?._ref) {
                 return (
                   <figure key={index} className="my-8">
-                    <div className="relative w-full aspect-video rounded-lg overflow-hidden shadow-lg">
+                    <div className="w-full rounded-lg overflow-hidden shadow-lg">
                       <Image
                         src={urlFor(block).width(1200).url()}
                         alt={block.alt || post.title}
-                        fill
-                        className="object-cover"
+                        width={1200}
+                        height={630}
+                        className="w-full h-auto"
                         sizes="(min-width: 768px) 630px, 100vw"
                       />
                     </div>
