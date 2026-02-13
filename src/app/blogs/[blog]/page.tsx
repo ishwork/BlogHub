@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
-import { FAVICON_ICON, BLOG_NAME } from '@/src/constants';
+import { FAVICON_ICON, BLOG_OG_IMAGE, SITE_URL } from '@/src/constants';
 import { getBlogPost } from '@/src/lib/fetchBlogpost';
 import { urlFor } from '@/src/lib/sanityClient';
 
@@ -28,12 +28,13 @@ export const generateMetadata = async ({
     openGraph: {
       title: `${post.title}`,
       description: `Read "${post.title}" on BlogHub by ${post.author}.`,
+      url: `${SITE_URL}/blogs/${blog}`,
       siteName: 'BlogHub',
       locale: 'en_US',
       type: 'article',
       images: [
         {
-          url: urlFor(post.mainImage.asset).url() || BLOG_NAME,
+          url: urlFor(post.mainImage.asset).url() || BLOG_OG_IMAGE,
           width: 1200,
           height: 630,
           alt: post.title,

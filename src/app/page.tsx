@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
-import { FAVICON_ICON, BLOG_NAME } from '@/src/constants';
+import { FAVICON_ICON, BLOG_OG_IMAGE, SITE_URL } from '@/src/constants';
 
 import { getAllBlogPosts } from '@/src/lib/fetchBlogpost';
 
@@ -15,10 +15,11 @@ export const metadata: Metadata = {
     title: 'BlogHub - Home',
     description:
       'Welcome to BlogHub, your go-to platform for amazing blog posts on tech, life, and more.',
+    url: SITE_URL,
     siteName: 'BlogHub',
     images: [
       {
-        url: BLOG_NAME,
+        url: BLOG_OG_IMAGE,
         width: 1200,
         height: 630,
         alt: 'BlogHub Logo',
