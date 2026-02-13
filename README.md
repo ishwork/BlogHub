@@ -2,6 +2,10 @@
 
 BlogHub is a clean, responsive blog platform built with Next.js and Sanity. It fetches posts from a Sanity dataset, renders a card-based homepage, and provides a detail view for each blog post.
 
+🔗 **Live:**
+
+- Vercel: [https://blog-hub-web.vercel.app](https://blog-hub-web.vercel.app)
+
 ## Features
 
 - Homepage with recent blog posts and featured cards
