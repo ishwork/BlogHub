@@ -1,0 +1,37 @@
+@import 'tailwindcss';
+
+/* Custom variants for dark mode */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Define CSS variables for light mode, .light class is added to the root element (<html>) when light mode is active */
+:root {
+  color-scheme: light;
+  --background: #f7f4ee;
+  --header-bg: #efe6da;
+  --footer-bg: #e8dccd;
+  --text: #1e1b16;
+}
+
+/* Define CSS variables for dark mode, .dark class is added to the root element (<html>) when dark mode is active */
+:root.dark {
+  color-scheme: dark;
+  --background: #14110b;
+  --header-bg: #1b160f;
+  --footer-bg: #18130d;
+  --text: #f5f1e8;
+}
+
+/* Global styles using CSS variables for theming */
+@theme {
+  --color-background: var(--background);
+  --color-header: var(--header-bg);
+  --color-footer: var(--footer-bg);
+  --color-text: var(--text);
+}
+
+/* Custom utility classes */
+@layer utilities {
+  .card-max-width {
+    max-width: 630px;
+  }
+}
