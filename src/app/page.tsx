@@ -7,6 +7,8 @@ import { getAllBlogPosts } from '@/src/lib/fetchBlogpost';
 
 import Frontpage from '@/src/components/Frontpage';
 
+export const revalidate = 60;
+
 export const metadata: Metadata = {
   title: 'BlogHub - Home',
   description:
