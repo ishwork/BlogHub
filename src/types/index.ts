@@ -24,6 +24,7 @@ export type BlogPost = {
           _ref: string;
         };
         alt?: string;
+        caption?: string;
       }
   >;
 };

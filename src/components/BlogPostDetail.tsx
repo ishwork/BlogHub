@@ -83,6 +83,11 @@ const BlogPostDetail = ({ post }: BlogPostDetailProps) => {
                         sizes="(min-width: 768px) 630px, 100vw"
                       />
                     </div>
+                    {block.caption && (
+                      <figcaption className="text-text/60 text-sm italic mt-2 text-center">
+                        {block.caption}
+                      </figcaption>
+                    )}
                   </figure>
                 );
               }
