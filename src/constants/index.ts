@@ -3,6 +3,7 @@ const BLOG_IMAGE = '/images/blogHub.svg';
 const LOGO_IMAGE = '/images/logo.svg';
 const SUN_ICON = '/images/sun-icon.svg';
 const MOON_ICON = '/images/moon-icon.svg';
+const SHARE = '/images/share.svg';
 
 // Site URL based on environment
 const SITE_URL =
@@ -13,4 +14,13 @@ const SITE_URL =
 // Absolute OG image URL
 const BLOG_OG_IMAGE = `${SITE_URL}${BLOG_IMAGE}`;
 
-export { FAVICON_ICON, BLOG_OG_IMAGE, BLOG_IMAGE, LOGO_IMAGE, SUN_ICON, MOON_ICON, SITE_URL };
+export {
+  FAVICON_ICON,
+  BLOG_OG_IMAGE,
+  BLOG_IMAGE,
+  LOGO_IMAGE,
+  SUN_ICON,
+  MOON_ICON,
+  SHARE,
+  SITE_URL,
+};

@@ -5,6 +5,8 @@ import { urlFor } from '@/src/lib/sanityClient';
 
 import { BlogPost } from '@/src/types';
 
+import ShareBlog from '@/src/components/ShareBlog';
+
 type BlogPostDetailProps = {
   post: BlogPost;
 };
@@ -42,6 +44,7 @@ const BlogPostDetail = ({ post }: BlogPostDetailProps) => {
                 day: 'numeric',
               })}
             </time>
+            <ShareBlog />
           </div>
         </header>
 
