@@ -27,7 +27,7 @@ const ThemeToggle = () => {
       className="inline-flex items-center gap-2 rounded-md border border-text/20 bg-background px-3 py-1.5 text-sm font-medium text-text hover:opacity-80"
     >
       <Image src={isDark ? SUN_ICON : MOON_ICON} alt="" aria-hidden="true" width={20} height={20} />
-      {isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+      {isDark ? 'Light Mode' : 'Dark Mode'}
     </button>
   );
 };
