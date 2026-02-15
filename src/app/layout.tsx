@@ -6,6 +6,7 @@ import '@/src/styles/globals.css';
 
 import Header from '@/src/components/Header';
 import Footer from '@/src/components/Footer';
+import QueryProvider from '@/src/components/QueryProvider';
 import { ThemeProvider } from '@/src/components/ThemeProvider';
 
 const geistSans = Geist({
@@ -30,11 +31,13 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col min-h-screen bg-background text-text`}
       >
-        <ThemeProvider>
-          <Header />
-          <main className="grow">{children}</main>
-          <Footer />
-        </ThemeProvider>
+        <QueryProvider>
+          <ThemeProvider>
+            <Header />
+            <main className="grow">{children}</main>
+            <Footer />
+          </ThemeProvider>
+        </QueryProvider>
       </body>
     </html>
   );
