@@ -1,12 +1,12 @@
 import { BlogPost } from '@/src/types';
 
-import BlogCard from '@/src/components/BlogCard';
+import LoadMorePosts from '@/src/components/LoadMorePosts';
 
 type FrontpageProps = {
-  posts: BlogPost[];
+  initialPosts: BlogPost[];
 };
 
-const Frontpage = ({ posts }: FrontpageProps) => {
+const Frontpage = ({ initialPosts }: FrontpageProps) => {
   return (
     <div className="bg-background min-h-screen py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -16,15 +16,9 @@ const Frontpage = ({ posts }: FrontpageProps) => {
         </div>
 
         {/* All Blog Posts */}
-        <div className="flex flex-wrap justify-center gap-8">
-          {posts.map((post, index) => (
-            <div key={post._id} className="w-full card-max-width">
-              <BlogCard post={post} priority={index === 0} />
-            </div>
-          ))}
-        </div>
+        {initialPosts.length > 0 && <LoadMorePosts initialPosts={initialPosts} />}
 
-        {posts.length === 0 && (
+        {initialPosts.length === 0 && (
           <div className="text-center py-12">
             <p className="text-text/70 text-lg">No blog posts found. Check back soon!</p>
           </div>
