@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation';
 
 import { FAVICON_ICON, BLOG_OG_IMAGE, SITE_URL } from '@/src/constants';
 
-import { getAllBlogPosts } from '@/src/lib/fetchBlogpost';
+import { getPaginatedBlogPosts } from '@/src/lib/fetchBlogpost';
 
 import Frontpage from '@/src/components/Frontpage';
 
@@ -37,11 +37,11 @@ export const metadata: Metadata = {
 };
 
 const Home = async () => {
-  const posts = await getAllBlogPosts();
+  const { posts } = await getPaginatedBlogPosts(0, 5);
 
   if (!posts) return notFound();
 
-  return <Frontpage posts={posts} />;
+  return <Frontpage initialPosts={posts} />;
 };
 
 export default Home;

@@ -10,6 +10,7 @@ BlogHub is a clean, responsive blog platform built with Next.js and Sanity. It f
 
 - Homepage with recent blog posts and featured cards
 - Dynamic blog post pages at `/blogs/[blog]`
+- Infinite scroll for blog posts (TanStack Query + Intersection Observer)
 - Sanity CMS integration for content and images
 - Theme support with `next-themes`
 - SEO-friendly metadata and Open Graph tags
@@ -19,6 +20,8 @@ BlogHub is a clean, responsive blog platform built with Next.js and Sanity. It f
 - Next.js App Router
 - React 19
 - TypeScript
+- TanStack Query (React Query) for data fetching and caching
+- Intersection Observer API for infinite scroll and lazy loading
 - Sanity client + image URL builder
 - Tailwind CSS
 
