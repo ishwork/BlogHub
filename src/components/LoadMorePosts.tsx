@@ -55,15 +55,12 @@ const LoadMorePosts = ({ initialPosts }: LoadMorePostsProps) => {
   const allPosts = data?.pages?.flatMap((page: PostsResponse) => page.posts) || [];
 
   return (
-    <div className="flex flex-col items-center">
-      <div className="flex flex-wrap justify-center gap-8 w-full">
-        {allPosts.map((post, index) => (
-          <div key={post._id} className="w-full card-max-width">
-            <BlogCard post={post} priority={index === 0} />
-          </div>
-        ))}
-      </div>
-
+    <div className="flex flex-wrap flex-col items-center justify-center gap-8 w-full">
+      {allPosts.map((post, index) => (
+        <div key={post._id} className="w-full card-max-width">
+          <BlogCard post={post} priority={index === 0} />
+        </div>
+      ))}
       {(isFetchingNextPage || hasNextPage) && <LoadMore fetchNextPage={fetchNextPage} />}
     </div>
   );
