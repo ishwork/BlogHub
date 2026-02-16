@@ -1,5 +1,6 @@
 import { BlogPost } from '@/src/types';
 
+import Hero from '@/src/components/Hero';
 import LoadMorePosts from '@/src/components/LoadMorePosts';
 
 type FrontpageProps = {
@@ -8,13 +9,9 @@ type FrontpageProps = {
 
 const Frontpage = ({ initialPosts }: FrontpageProps) => {
   return (
-    <div className="bg-background min-h-screen py-12">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Hero Section */}
-        <div className="text-center mb-12">
-          <h1 className="text-5xl font-bold text-text mb-4">Welcome to BlogHub</h1>
-        </div>
-
+    <>
+      <Hero />
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* All Blog Posts */}
         {initialPosts.length > 0 && <LoadMorePosts initialPosts={initialPosts} />}
 
@@ -23,8 +20,8 @@ const Frontpage = ({ initialPosts }: FrontpageProps) => {
             <p className="text-text/70 text-lg">No blog posts found. Check back soon!</p>
           </div>
         )}
-      </div>
-    </div>
+      </section>
+    </>
   );
 };
 
