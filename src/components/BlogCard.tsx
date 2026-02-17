@@ -21,8 +21,8 @@ const BlogCard = ({ post, priority = false }: BlogCardProps) => {
               fill
               className="object-cover"
               sizes="(min-width: 768px) 630px, 100vw"
-              priority={priority}
               loading={priority ? 'eager' : 'lazy'}
+              fetchPriority={priority ? 'high' : undefined}
             />
           </div>
         )}
