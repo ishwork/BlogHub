@@ -43,8 +43,8 @@ export const getPaginatedBlogPosts = async ({
 
   const [posts, totalCount] = await Promise.all([
     client.fetch(query, {
-      start: start * limit,
-      end: (start + 1) * limit,
+      start: start,
+      end: start + limit,
     }),
     client.fetch(`count(*[_type == "blogPost"])`),
   ]);

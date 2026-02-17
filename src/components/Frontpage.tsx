@@ -17,14 +17,14 @@ type FrontpageProps = {
 
 // Fetch paginated posts for infinite loading on the front page
 const fetchPaginatedPosts = async ({
-  pageParam = 1,
+  pageParam = 0,
 }: {
   pageParam?: number;
 }): Promise<BlogPostResponse> => {
-  // pageParam=1: start=5, pageParam=2: start=10, etc.
+  // pageParam=0: start=0, pageParam=1: start=5, etc.
   const start = pageParam * LIMIT;
   try {
-    const response = await fetch(`/api/posts?start=${start}&limit=${LIMIT}`);
+    const response = await fetch(`/api/frontpage?start=${start}&limit=${LIMIT}`);
     if (!response.ok) {
       throw new Error('Failed to fetch posts');
     }
@@ -41,7 +41,7 @@ const Frontpage = ({ initialPosts }: FrontpageProps) => {
   };
 
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } = useFetchInfinitePosts(
-    'posts',
+    'frontpage-posts',
     initialData,
     fetchPaginatedPosts,
   ) as {

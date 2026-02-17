@@ -22,7 +22,7 @@ const useFetchInfinitePosts: UseFetchInfinitePosts = (queryKey, initialData, fet
       const fetchedPages = allPages.length;
       return totalPages > fetchedPages ? fetchedPages : undefined;
     },
-    initialPageParam: 1, // Start from page 1 since page 0 is SSR
+    initialPageParam: 0,
     enabled: !!queryKey,
     initialData: initialData
       ? {
