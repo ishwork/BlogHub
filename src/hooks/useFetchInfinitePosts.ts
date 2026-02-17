@@ -4,7 +4,7 @@ import { BlogPost } from '@/src/types';
 
 type PostsResponse = {
   posts: BlogPost[];
-  totalPages: number;
+  totalPages?: number;
 };
 
 type UseFetchInfinitePosts = (
@@ -18,11 +18,11 @@ const useFetchInfinitePosts: UseFetchInfinitePosts = (queryKey, initialData, fet
     queryKey: [queryKey],
     queryFn: fetchFn,
     getNextPageParam: (lastPage, allPages) => {
-      const totalPages = lastPage?.totalPages;
+      const totalPages = lastPage?.totalPages ?? 0;
       const fetchedPages = allPages.length;
       return totalPages > fetchedPages ? fetchedPages : undefined;
     },
-    initialPageParam: 0,
+    initialPageParam: 1, // Start from page 1 since page 0 is SSR
     enabled: !!queryKey,
     initialData: initialData
       ? {
