@@ -37,7 +37,7 @@ export const metadata: Metadata = {
 };
 
 const Home = async () => {
-  const { posts } = await getPaginatedBlogPosts(0, 5);
+  const { posts } = await getPaginatedBlogPosts({ start: 0, limit: 5 });
 
   if (!posts) return notFound();
 
