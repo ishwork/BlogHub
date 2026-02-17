@@ -16,11 +16,11 @@ const BlogCard = ({ post, priority = false }: BlogCardProps) => {
         {post.mainImage && (
           <div className="relative w-full aspect-video overflow-hidden">
             <Image
-              src={urlFor(post.mainImage).width(1280).height(720).url()}
+              src={urlFor(post.mainImage).width(760).height(428).format('webp').url()}
               alt={post.title}
               fill
               className="object-cover"
-              sizes="(min-width: 768px) 630px, 100vw"
+              sizes="(min-width: 640px) 100vw, 380px"
               loading={priority ? 'eager' : 'lazy'}
               fetchPriority={priority ? 'high' : undefined}
             />
