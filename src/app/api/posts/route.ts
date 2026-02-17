@@ -8,11 +8,11 @@ export const dynamic = 'force-dynamic';
 export const GET = async (request: NextRequest) => {
   try {
     const { searchParams } = new URL(request.url);
-    const start = Number(searchParams.get('start') || '0');
-    const limit = Number(searchParams.get('limit') || '5');
+    const start = parseInt(searchParams.get('start') || '0', 10);
+    const limit = parseInt(searchParams.get('limit') || '5', 10);
 
-    const safeStart = Number.isFinite(start) && start >= 0 ? start : 0;
-    const safeLimit = Number.isFinite(limit) && limit > 0 ? limit : 5;
+    const safeStart = Number.isNaN(start) ? 0 : start;
+    const safeLimit = Number.isNaN(limit) ? 5 : limit;
 
     const query = `*[_type == "blogPost"] | order(publishedAt desc)[$start...$end] {
     _id,
@@ -32,7 +32,7 @@ export const GET = async (request: NextRequest) => {
       client.fetch(`count(*[_type == "blogPost"])`),
     ]);
 
-    const totalPages = Math.ceil((totalCount || 0) / safeLimit) || 0;
+    const totalPages = Math.ceil(totalCount / safeLimit) || 0;
 
     return NextResponse.json({
       posts: posts as BlogPost[],
