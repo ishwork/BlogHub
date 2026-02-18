@@ -20,7 +20,8 @@ const useFetchInfinitePosts: UseFetchInfinitePosts = (queryKey, initialData, fet
     getNextPageParam: (lastPage, allPages) => {
       const totalPages = lastPage?.totalPages ?? 0;
       const fetchedPages = allPages.length;
-      return totalPages > fetchedPages ? fetchedPages : undefined;
+      const nextPageParam = totalPages > fetchedPages ? fetchedPages : undefined;
+      return nextPageParam;
     },
     initialPageParam: 0,
     enabled: !!queryKey,
