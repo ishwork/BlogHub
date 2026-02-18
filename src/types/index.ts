@@ -16,6 +16,7 @@ export type BlogPost = {
         _type: 'block';
         children: Array<{
           text: string;
+          marks?: string[];
         }>;
       }
     | {

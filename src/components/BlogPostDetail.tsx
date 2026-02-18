@@ -69,7 +69,13 @@ const BlogPostDetail = ({ post }: BlogPostDetailProps) => {
               if (block._type === 'block') {
                 return (
                   <p key={index} className="text-text/80 text-lg leading-relaxed mb-6">
-                    {block.children.map((child) => child.text).join(' ')}
+                    {block.children.map((child, childIdx) => {
+                      // If child has marks and includes 'strong', render as bold
+                      if (child.marks && child.marks.includes('strong')) {
+                        return <strong key={childIdx}>{child.text}</strong>;
+                      }
+                      return child.text;
+                    })}
                   </p>
                 );
               }
