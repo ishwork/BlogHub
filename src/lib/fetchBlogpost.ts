@@ -1,6 +1,6 @@
-import { client } from './sanityClient';
-
 import { BlogPost } from '@/src/types';
+
+import { client } from '@/src/lib/sanityClient';
 
 export type BlogPostResponse = {
   posts: BlogPost[];
@@ -10,21 +10,6 @@ export type BlogPostResponse = {
 export type PaginatedBlogPostParams = {
   start?: number;
   limit?: number;
-};
-
-export const getAllBlogPosts = async (): Promise<BlogPost[]> => {
-  const query = `*[_type == "blogPost"] | order(publishedAt desc) {
-    _id,
-    title,
-    slug,
-    author,
-    mainImage,
-    publishedAt,
-    body
-  }`;
-
-  const posts = await client.fetch(query);
-  return posts;
 };
 
 export const getPaginatedBlogPosts = async ({
@@ -37,6 +22,7 @@ export const getPaginatedBlogPosts = async ({
     slug,
     author,
     mainImage,
+    imageCredit,
     publishedAt,
     body
   }`;
@@ -58,7 +44,16 @@ export const getPaginatedBlogPosts = async ({
 };
 
 export const getBlogPost = async (slug: string): Promise<BlogPost | null> => {
-  const posts = await getAllBlogPosts();
-  const post = posts.find((post) => post.slug.current === slug);
+  const query = `*[_type == "blogPost" && slug.current == "${slug}"][0]{
+    _id,
+    title,
+    slug,
+    author,
+    mainImage,
+    imageCredit,
+    publishedAt,
+    body
+  }`;
+  const post = await client.fetch(query);
   return post || null;
 };
