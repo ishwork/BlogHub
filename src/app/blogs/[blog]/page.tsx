@@ -7,8 +7,6 @@ import { urlFor } from '@/src/lib/sanityClient';
 
 import BlogPostDetail from '@/src/components/BlogPostDetail';
 
-export const revalidate = 60;
-
 export const generateMetadata = async ({
   params,
 }: {

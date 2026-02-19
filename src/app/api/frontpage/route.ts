@@ -14,7 +14,13 @@ export const GET = async (request: NextRequest) => {
     const safeLimit = Number.isNaN(limit) ? 5 : limit;
 
     const result = await getPaginatedBlogPosts({ start: safeStart, limit: safeLimit });
-    return NextResponse.json(result);
+    return NextResponse.json(result, {
+      status: 200,
+      headers: {
+        'Content-Type': 'application/json',
+        'Cache-Control': 'public, max-age=300, stale-while-revalidate=60',
+      },
+    });
   } catch (error) {
     console.error('Error fetching posts:', error);
     return NextResponse.json(
