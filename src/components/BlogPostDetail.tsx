@@ -43,15 +43,22 @@ const BlogPostDetail = ({ post }: BlogPostDetailProps) => (
 
       {/* Featured Image */}
       {post.mainImage && (
-        <div className="relative w-full aspect-video mb-8 rounded-lg overflow-hidden shadow-lg">
-          <Image
-            src={urlFor(post.mainImage).width(760).height(428).format('webp').url()}
-            alt={post.title}
-            fill
-            className="object-cover"
-            sizes="(min-width: 640px) 100vw, 380px"
-            priority
-          />
+        <div className="mb-6 flex flex-col items-center">
+          <div className="relative w-full aspect-video rounded-lg overflow-hidden shadow-lg">
+            <Image
+              src={urlFor(post.mainImage).width(760).height(428).format('webp').url()}
+              alt={post.title}
+              fill
+              className="object-cover"
+              sizes="(min-width: 640px) 100vw, 380px"
+              priority
+            />
+          </div>
+          {post.imageCredit && (
+            <span className="text-text/90 text-sm italic mt-2">
+              Image credit: {post.imageCredit}
+            </span>
+          )}
         </div>
       )}
 
@@ -86,10 +93,15 @@ const BlogPostDetail = ({ post }: BlogPostDetailProps) => (
                       sizes="(min-width: 640px) 100vw, 380px"
                     />
                   </div>
-                  {block.caption && (
-                    <figcaption className="text-text/90 text-sm italic mt-2 text-center">
-                      {block.caption}
-                    </figcaption>
+                  {(block.caption || block.imageCredit) && (
+                    <div className="flex justify-center items-center flex-wrap gap-x-1 mt-2 text-text/90 text-sm italic">
+                      <p>
+                        {block.caption}
+                        {block.imageCredit && (
+                          <span className="ml-2">( Image credit: {block.imageCredit} )</span>
+                        )}
+                      </p>
+                    </div>
                   )}
                 </figure>
               );

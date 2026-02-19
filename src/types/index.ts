@@ -10,6 +10,7 @@ export type BlogPost = {
       _ref: string;
     };
   };
+  imageCredit?: string;
   publishedAt: string;
   body: Array<
     | {
@@ -26,6 +27,7 @@ export type BlogPost = {
         };
         alt?: string;
         caption?: string;
+        imageCredit?: string;
       }
   >;
 };
