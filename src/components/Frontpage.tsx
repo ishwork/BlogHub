@@ -58,7 +58,7 @@ const Frontpage = ({ initialPosts }: FrontpageProps) => {
       <Hero />
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* All Blog Posts */}
-        <div className="flex flex-wrap flex-col items-center justify-center gap-8 w-full">
+        <div className="flex flex-wrap flex-col items-center justify-center gap-4 w-full">
           {allPosts.map((post, index) => (
             <div key={`${post._id}-${index}`} className="w-full card-max-width">
               <BlogCard post={post} priority={index === 0} />

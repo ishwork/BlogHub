@@ -7,6 +7,7 @@
 :root {
   color-scheme: light;
   --background: #f7f4ee;
+  --blog-background: #ffffff;
   --header-bg: #efe6da;
   --footer-bg: #e8dccd;
   --text: #1e1b16;
@@ -16,7 +17,7 @@
 :root.dark {
   color-scheme: dark;
   --background: #14110b;
-  --header-bg: #1b160f;
+  --blog-background: #1a1a1a;
   --footer-bg: #18130d;
   --text: #f5f1e8;
 }
@@ -24,6 +25,7 @@
 /* Global styles using CSS variables for theming */
 @theme {
   --color-background: var(--background);
+  --color-blog-background: var(--blog-background);
   --color-header: var(--header-bg);
   --color-footer: var(--footer-bg);
   --color-text: var(--text);

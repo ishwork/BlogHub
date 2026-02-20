@@ -11,12 +11,12 @@ type BlogPostDetailProps = {
 };
 
 const BlogPostDetail = ({ post }: BlogPostDetailProps) => (
-  <article className="bg-background min-h-screen py-12 w-full flex justify-center">
-    <div className="px-4 sm:px-6 w-full card-max-width">
+  <article className="bg-background min-h-screen w-full flex justify-center">
+    <div className="bg-blog-background w-full card-max-width">
       {/* Back Button */}
       <Link
         href="/"
-        className="inline-flex items-center text-text/70 hover:text-text mb-8 transition-colors"
+        className="inline-flex items-center text-text/70 hover:text-text mt-4 px-4 transition-colors"
       >
         <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -25,12 +25,12 @@ const BlogPostDetail = ({ post }: BlogPostDetailProps) => (
       </Link>
 
       {/* Post Header */}
-      <header className="mb-8">
-        <h1 className="text-4xl md:text-5xl font-bold text-text mb-4">{post.title}</h1>
-        <div className="flex items-center text-text/70 mb-6">
-          <span className="font-medium text-lg">{post.author}</span>
-          <span className="mx-3">•</span>
-          <time className="text-lg">
+      <header className="p-4">
+        <h1 className="text-4xl md:text-5xl font-bold text-text m-0 pb-4">{post.title}</h1>
+        <div className="flex items-center text-text/70">
+          <span className="font-medium text-xs sm:text-sm">{post.author}</span>
+          <span className="mx-2">|</span>
+          <time className="text-xs sm:text-sm">
             {new Date(post.publishedAt).toLocaleDateString('en-US', {
               year: 'numeric',
               month: 'long',
@@ -44,7 +44,7 @@ const BlogPostDetail = ({ post }: BlogPostDetailProps) => (
       {/* Featured Image */}
       {post.mainImage && (
         <div className="mb-6 flex flex-col items-center">
-          <div className="relative w-full aspect-video rounded-lg overflow-hidden shadow-lg">
+          <div className="relative w-full aspect-video overflow-hidden shadow-lg">
             <Image
               src={urlFor(post.mainImage).width(760).height(428).format('webp').url()}
               alt={post.title}
@@ -55,7 +55,7 @@ const BlogPostDetail = ({ post }: BlogPostDetailProps) => (
             />
           </div>
           {post.imageCredit && (
-            <span className="text-text/90 text-sm italic mt-2">
+            <span className="text-text/90 text-sm italic pt-2 px-4 self-end">
               Image credit: {post.imageCredit}
             </span>
           )}
@@ -63,7 +63,7 @@ const BlogPostDetail = ({ post }: BlogPostDetailProps) => (
       )}
 
       {/* Post Content */}
-      <div className="prose prose-lg max-w-none">
+      <div className="prose prose-lg max-w-none px-4">
         {post.body &&
           post.body.map((block, index) => {
             if (block._type === 'block') {
@@ -82,7 +82,7 @@ const BlogPostDetail = ({ post }: BlogPostDetailProps) => (
 
             if (block._type === 'image' && block.asset?._ref) {
               return (
-                <figure key={index} className="my-8">
+                <figure key={index} className="my-6">
                   <div className="w-full rounded-lg overflow-hidden shadow-lg">
                     <Image
                       src={urlFor(block).width(760).format('webp').url()}
@@ -94,7 +94,7 @@ const BlogPostDetail = ({ post }: BlogPostDetailProps) => (
                     />
                   </div>
                   {(block.caption || block.imageCredit) && (
-                    <div className="flex justify-center items-center flex-wrap gap-x-1 mt-2 text-text/90 text-sm italic">
+                    <div className="flex justify-end items-center flex-wrap gap-x-1 mt-2 px-2 text-text/90 text-sm italic">
                       <p>
                         {block.caption}
                         {block.imageCredit && (

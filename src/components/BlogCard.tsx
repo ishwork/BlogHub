@@ -12,7 +12,7 @@ type BlogCardProps = {
 const BlogCard = ({ post, priority = false }: BlogCardProps) => {
   return (
     <Link href={`/blogs/${post.slug.current}`} className="group">
-      <article className="bg-background rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 h-full flex flex-col">
+      <article className="bg-blog-background rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 h-full flex flex-col">
         {post.mainImage && (
           <div className="relative w-full aspect-video overflow-hidden">
             <Image
@@ -26,13 +26,12 @@ const BlogCard = ({ post, priority = false }: BlogCardProps) => {
             />
           </div>
         )}
-        <div className="p-6 grow flex flex-col">
+        <div className="p-4 grow flex flex-col">
           <h2 className="text-2xl font-semibold text-text mb-3 group-hover:text-text/80 transition-colors">
             {post.title}
           </h2>
-          <div className="flex items-center text-sm text-text/70">
+          <div className="flex items-center gap-x-4 text-sm text-text/70">
             <span className="font-medium">{post.author}</span>
-            <span className="mx-2">•</span>
             <time>
               {new Date(post.publishedAt).toLocaleDateString('en-US', {
                 year: 'numeric',
