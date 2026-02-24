@@ -15,9 +15,15 @@ export type BlogPost = {
   body: Array<
     | {
         _type: 'block';
+        style?: 'normal' | 'h2' | 'h3';
         children: Array<{
           text: string;
           marks?: string[];
+        }>;
+        markDefs?: Array<{
+          _key: string;
+          _type: 'link';
+          href: string;
         }>;
       }
     | {

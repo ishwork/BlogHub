@@ -8,8 +8,8 @@
   color-scheme: light;
   --background: #f7f4ee;
   --blog-background: #ffffff;
-  --header-bg: #efe6da;
-  --footer-bg: #e8dccd;
+  --header-background: #efe6da;
+  --footer-background: #e8dccd;
   --text: #1e1b16;
 }
 
@@ -18,7 +18,8 @@
   color-scheme: dark;
   --background: #14110b;
   --blog-background: #1a1a1a;
-  --footer-bg: #18130d;
+  --header-background: #18130d;
+  --footer-background: #18130d;
   --text: #f5f1e8;
 }
 
@@ -26,8 +27,8 @@
 @theme {
   --color-background: var(--background);
   --color-blog-background: var(--blog-background);
-  --color-header: var(--header-bg);
-  --color-footer: var(--footer-bg);
+  --color-header: var(--header-background);
+  --color-footer: var(--footer-background);
   --color-text: var(--text);
 }
 
@@ -35,5 +36,11 @@
 @layer utilities {
   .card-max-width {
     max-width: 630px;
+  }
+  .bg-header {
+    background-color: var(--color-header);
+  }
+  .bg-footer {
+    background-color: var(--color-footer);
   }
 }

@@ -3,6 +3,7 @@ import Link from 'next/link';
 
 import { BlogPost } from '@/src/types';
 import { urlFor } from '@/src/lib/sanityClient';
+import { getChildLinkDef, getChildStrongMark } from '@/src/lib/utils/bodyPartTextHandler';
 
 import ShareBlog from '@/src/components/ShareBlog';
 
@@ -67,19 +68,54 @@ const BlogPostDetail = ({ post }: BlogPostDetailProps) => (
         {post.body &&
           post.body.map((block, index) => {
             if (block._type === 'block') {
+              const content = block.children.map((child, childIdx) => {
+                // Use utility to fetch link markDef
+                const linkDef = getChildLinkDef(child, block);
+                if (linkDef) {
+                  return (
+                    <Link
+                      key={childIdx}
+                      href={linkDef.href}
+                      className="text-primary underline"
+                      target={linkDef.href.startsWith('http') ? '_blank' : undefined}
+                      rel={linkDef.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                    >
+                      {child.text}
+                    </Link>
+                  );
+                }
+                // If child has marks and includes 'strong', render as bold
+                if (getChildStrongMark(child)) {
+                  return <strong key={childIdx}>{child.text}</strong>;
+                }
+                return child.text;
+              });
+
+              // Handle h2 style
+              if (block.style === 'h2') {
+                return (
+                  <h2 key={index} className="text-2xl md:text-3xl font-bold text-text mb-4 mt-8">
+                    {content}
+                  </h2>
+                );
+              }
+              // Handle h3 style
+              if (block.style === 'h3') {
+                return (
+                  <h3 key={index} className="text-xl md:text-2xl font-semibold text-text mb-3 mt-6">
+                    {content}
+                  </h3>
+                );
+              }
+              // Default to paragraph
               return (
                 <p key={index} className="text-text/80 text-lg leading-relaxed mb-6">
-                  {block.children.map((child, childIdx) => {
-                    // If child has marks and includes 'strong', render as bold
-                    if (child.marks && child.marks.includes('strong')) {
-                      return <strong key={childIdx}>{child.text}</strong>;
-                    }
-                    return child.text;
-                  })}
+                  {content}
                 </p>
               );
             }
 
+            // Handle images within the body
             if (block._type === 'image' && block.asset?._ref) {
               return (
                 <figure key={index} className="my-6">
