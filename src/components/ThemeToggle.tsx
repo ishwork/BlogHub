@@ -21,6 +21,7 @@ const ThemeToggle = () => {
   return (
     <button
       type="button"
+      data-testid="theme-toggle-button"
       onClick={() => setTheme(isDark ? 'light' : 'dark')}
       aria-pressed={isDark}
       aria-label={`Switch to ${isDark ? 'light' : 'dark'} mode`}
