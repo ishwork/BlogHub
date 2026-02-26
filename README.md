@@ -14,6 +14,7 @@ BlogHub is a clean, responsive blog platform built with Next.js and Sanity. It f
 - Sanity CMS integration for content and images
 - Theme support with `next-themes`
 - SEO-friendly metadata and Open Graph tags
+- Docker support for easy containerization
 
 ## Tech Stack
 
