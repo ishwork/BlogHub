@@ -5,6 +5,7 @@ import { LOGO_IMAGE } from '@/src/constants';
 import ThemeToggle from '@/src/components/ThemeToggle';
 
 const Header = () => {
+  console.log('Rendering Header component');
   return (
     <header className="bg-header text-text shadow-md">
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
