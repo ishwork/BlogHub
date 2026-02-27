@@ -3,6 +3,8 @@ name: npm test
 on:
   pull_request:
     types: [opened, synchronize, reopened]
+    paths-ignore:
+      - '.github/**'
 
 jobs:
   npm-tests:
@@ -12,7 +14,7 @@ jobs:
         node-version: [20.19]
 
     steps:
-      - name: Checkout code
+      - name: Checkout
         uses: actions/checkout@v3
       - name: 'Use Node.js ${{ matrix.node-version }}'
         uses: actions/setup-node@v3
