@@ -44,7 +44,10 @@ export const generateMetadata = async ({
     icons: {
       icon: FAVICON_ICON,
     },
-    robots: 'index, follow',
+    robots: {
+      follow: process.env.NODE_ENV === 'production',
+      index: process.env.NODE_ENV === 'production',
+    },
   };
 };
 

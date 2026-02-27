@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import { Analytics } from '@vercel/analytics/react';
 
+import { SITE_URL } from '@/src/constants';
 import '@/src/styles/globals.css';
 
 import Header from '@/src/components/Header';
@@ -21,7 +22,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'),
+  metadataBase: new URL(SITE_URL ?? 'http://localhost:3000'),
   title: 'BlogHub - Beautiful Blog Platform',
   description: 'Read amazing blog posts about tech, life, and more',
 };

@@ -31,7 +31,10 @@ export const metadata: Metadata = {
   icons: {
     icon: FAVICON_ICON,
   },
-  robots: 'index, follow',
+  robots: {
+    follow: process.env.NODE_ENV === 'production',
+    index: process.env.NODE_ENV === 'production',
+  },
 };
 
 const Home = async () => {
