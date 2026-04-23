@@ -13,7 +13,7 @@ export const BlockChildSchema = z.object({
 
 export const BlockBodySchema = z.object({
   _type: z.literal('block'),
-  style: z.enum(['normal', 'h2', 'h3']).optional(),
+  style: z.enum(['normal', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'blockquote']).optional(),
   children: z.array(BlockChildSchema),
   markDefs: z.array(MarkDefSchema).optional(),
 });
@@ -21,9 +21,9 @@ export const BlockBodySchema = z.object({
 export const ImageBodySchema = z.object({
   _type: z.literal('image'),
   asset: z.object({ _ref: z.string() }),
-  alt: z.string().optional(),
-  caption: z.string().optional(),
-  imageCredit: z.string().optional(),
+  alt: z.string().nullish(),
+  caption: z.string().nullish(),
+  imageCredit: z.string().nullish(),
 });
 
 export const BlogPostSchema = z.object({
@@ -34,7 +34,7 @@ export const BlogPostSchema = z.object({
   mainImage: z.object({
     asset: z.object({ _ref: z.string() }),
   }),
-  imageCredit: z.string().optional(),
+  imageCredit: z.string().nullish(),
   publishedAt: z.string().datetime({ offset: true }),
   body: z.array(z.discriminatedUnion('_type', [BlockBodySchema, ImageBodySchema])),
 });
