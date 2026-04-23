@@ -42,8 +42,8 @@ export const getBlogPost = async (slug: string): Promise<BlogPost | null> => {
     body
   }`;
 
-  const raw = await client.fetch(query);
-  if (!raw) return null;
+  const rawPost = await client.fetch(query);
+  if (!rawPost) return null;
 
-  return BlogPostSchema.parse(raw);
+  return BlogPostSchema.parse(rawPost);
 };
