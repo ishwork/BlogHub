@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { ZodError } from 'zod';
+import { z, ZodError } from 'zod';
 
 import { getPaginatedBlogPosts } from '@/src/lib/fetchBlogpost';
 import { PaginatedBlogPostParamsSchema } from '@/src/lib/schemas';
@@ -27,7 +27,7 @@ export const GET = async (request: NextRequest) => {
   } catch (error) {
     if (error instanceof ZodError) {
       return NextResponse.json(
-        { error: 'Invalid query parameters', details: error.flatten().fieldErrors },
+        { error: 'Invalid query parameters', details: z.flattenError(error).fieldErrors },
         { status: 400 },
       );
     }

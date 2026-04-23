@@ -3,7 +3,7 @@ import { z } from 'zod';
 export const MarkDefSchema = z.object({
   _key: z.string(),
   _type: z.literal('link'),
-  href: z.string().url(),
+  href: z.url(),
 });
 
 export const BlockChildSchema = z.object({
@@ -35,7 +35,7 @@ export const BlogPostSchema = z.object({
     asset: z.object({ _ref: z.string() }),
   }),
   imageCredit: z.string().nullish(),
-  publishedAt: z.string().datetime({ offset: true }),
+  publishedAt: z.iso.datetime({ offset: true }),
   body: z.array(z.discriminatedUnion('_type', [BlockBodySchema, ImageBodySchema])),
 });
 
