@@ -1,7 +1,6 @@
 'use client';
 
-import { BlogPost } from '@/src/types';
-import type { BlogPostResponse } from '@/src/lib/fetchBlogpost';
+import { BlogPost, BlogPostResponse } from '@/src/types';
 
 import useFetchInfinitePosts from '@/src/hooks/useFetchInfinitePosts';
 
