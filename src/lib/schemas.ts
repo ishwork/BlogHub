@@ -39,7 +39,7 @@ export const BlogPostSchema = z.object({
   body: z.array(z.discriminatedUnion('_type', [BlockBodySchema, ImageBodySchema])),
 });
 
-export const BlogPostResponseSchema = z.object({
+export const PaginatedBlogPostsSchema = z.object({
   posts: z.array(BlogPostSchema),
   totalPages: z.number().int().nonnegative().optional(),
 });

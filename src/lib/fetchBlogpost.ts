@@ -1,11 +1,11 @@
-import { BlogPost, BlogPostResponse, PaginatedBlogPostParams } from '@/src/types';
+import { BlogPost, PaginatedBlogPosts, PaginatedBlogPostParams } from '@/src/types';
 import { BlogPostSchema, PaginatedBlogPostParamsSchema } from '@/src/lib/schemas';
 
 import { client } from '@/src/lib/sanityClient';
 
 export const getPaginatedBlogPosts = async (
   params: PaginatedBlogPostParams,
-): Promise<BlogPostResponse> => {
+): Promise<PaginatedBlogPosts> => {
   const { start, limit } = PaginatedBlogPostParamsSchema.parse(params);
 
   const query = `*[_type == "blogPost"] | order(publishedAt desc)[$start...$end] {

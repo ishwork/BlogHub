@@ -1,6 +1,6 @@
 'use client';
 
-import { BlogPost, BlogPostResponse } from '@/src/types';
+import { BlogPost, PaginatedBlogPosts } from '@/src/types';
 
 import useFetchInfinitePosts from '@/src/hooks/useFetchInfinitePosts';
 
@@ -19,7 +19,7 @@ const fetchPaginatedPosts = async ({
   pageParam = 0,
 }: {
   pageParam?: number;
-}): Promise<BlogPostResponse> => {
+}): Promise<PaginatedBlogPosts> => {
   // pageParam=0: start=0, pageParam=1: start=5, etc.
   const start = pageParam * LIMIT;
   try {
@@ -35,7 +35,7 @@ const fetchPaginatedPosts = async ({
 };
 
 const Frontpage = ({ initialPosts }: FrontpageProps) => {
-  const initialData: BlogPostResponse = {
+  const initialData: PaginatedBlogPosts = {
     posts: initialPosts,
   };
 
@@ -44,7 +44,7 @@ const Frontpage = ({ initialPosts }: FrontpageProps) => {
     initialData,
     fetchPaginatedPosts,
   ) as {
-    data: { pages: BlogPostResponse[] } | undefined;
+    data: { pages: PaginatedBlogPosts[] } | undefined;
     fetchNextPage: () => void;
     hasNextPage: boolean | undefined;
     isFetchingNextPage: boolean;
