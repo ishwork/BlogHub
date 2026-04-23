@@ -43,6 +43,7 @@ Uses a hybrid rendering model:
 
 - Next.js 16 App Router
 - React 19 + TypeScript
+- Zod (runtime schema validation)
 - TanStack Query (infinite queries + client caching)
 - Sanity (`@sanity/client`, `@sanity/image-url`)
 - Tailwind CSS v4
