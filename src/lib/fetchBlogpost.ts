@@ -1,21 +1,13 @@
-import { BlogPost } from '@/src/types';
+import { BlogPost, BlogPostResponse, PaginatedBlogPostParams } from '@/src/types';
+import { BlogPostSchema, PaginatedBlogPostParamsSchema } from '@/src/lib/schemas';
 
 import { client } from '@/src/lib/sanityClient';
 
-export type BlogPostResponse = {
-  posts: BlogPost[];
-  totalPages?: number;
-};
+export const getPaginatedBlogPosts = async (
+  params: PaginatedBlogPostParams,
+): Promise<BlogPostResponse> => {
+  const { start, limit } = PaginatedBlogPostParamsSchema.parse(params);
 
-export type PaginatedBlogPostParams = {
-  start?: number;
-  limit?: number;
-};
-
-export const getPaginatedBlogPosts = async ({
-  start = 0,
-  limit = 5,
-}: PaginatedBlogPostParams): Promise<BlogPostResponse> => {
   const query = `*[_type == "blogPost"] | order(publishedAt desc)[$start...$end] {
     _id,
     title,
@@ -27,20 +19,15 @@ export const getPaginatedBlogPosts = async ({
     body
   }`;
 
-  const [posts, totalCount] = await Promise.all([
-    client.fetch(query, {
-      start: start,
-      end: start + limit,
-    }),
+  const [rawPosts, totalCount] = await Promise.all([
+    client.fetch(query, { start, end: start + limit }),
     client.fetch(`count(*[_type == "blogPost"])`),
   ]);
 
+  const posts = BlogPostSchema.array().parse(rawPosts ?? []);
   const totalPages = Math.ceil((totalCount || 0) / limit) || 0;
 
-  return {
-    posts: posts || [],
-    totalPages,
-  };
+  return { posts, totalPages };
 };
 
 export const getBlogPost = async (slug: string): Promise<BlogPost | null> => {
@@ -54,6 +41,9 @@ export const getBlogPost = async (slug: string): Promise<BlogPost | null> => {
     publishedAt,
     body
   }`;
-  const post = await client.fetch(query);
-  return post || null;
+
+  const raw = await client.fetch(query);
+  if (!raw) return null;
+
+  return BlogPostSchema.parse(raw);
 };
