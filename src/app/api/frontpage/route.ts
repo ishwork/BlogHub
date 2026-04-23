@@ -1,19 +1,22 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { z, ZodError } from 'zod';
 
 import { getPaginatedBlogPosts } from '@/src/lib/fetchBlogpost';
+import { PaginatedBlogPostParamsSchema } from '@/src/lib/schemas';
 
 export const dynamic = 'force-dynamic';
 
 export const GET = async (request: NextRequest) => {
   try {
     const { searchParams } = new URL(request.url);
-    const start = parseInt(searchParams.get('start') || '0', 10);
-    const limit = parseInt(searchParams.get('limit') || '5', 10);
 
-    const safeStart = Number.isNaN(start) ? 0 : start;
-    const safeLimit = Number.isNaN(limit) ? 5 : limit;
+    const params = PaginatedBlogPostParamsSchema.parse({
+      start: searchParams.get('start') ?? undefined,
+      limit: searchParams.get('limit') ?? undefined,
+    });
 
-    const result = await getPaginatedBlogPosts({ start: safeStart, limit: safeLimit });
+    const result = await getPaginatedBlogPosts(params);
+
     return NextResponse.json(result, {
       status: 200,
       headers: {
@@ -22,13 +25,14 @@ export const GET = async (request: NextRequest) => {
       },
     });
   } catch (error) {
+    if (error instanceof ZodError) {
+      return NextResponse.json(
+        { error: 'Invalid query parameters', details: z.flattenError(error).fieldErrors },
+        { status: 400 },
+      );
+    }
+
     console.error('Error fetching posts:', error);
-    return NextResponse.json(
-      {
-        posts: [],
-        totalPages: 0,
-      },
-      { status: 500 },
-    );
+    return NextResponse.json({ posts: [], totalPages: 0 }, { status: 500 });
   }
 };
