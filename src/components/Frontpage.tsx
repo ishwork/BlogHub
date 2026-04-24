@@ -12,6 +12,7 @@ const LIMIT = 5;
 
 type FrontpageProps = {
   initialPosts: BlogPost[];
+  initialTotalPages?: number;
 };
 
 // Fetch paginated posts for infinite loading on the front page
@@ -34,9 +35,10 @@ const fetchPaginatedPosts = async ({
   }
 };
 
-const Frontpage = ({ initialPosts }: FrontpageProps) => {
+const Frontpage = ({ initialPosts, initialTotalPages }: FrontpageProps) => {
   const initialData: PaginatedBlogPosts = {
     posts: initialPosts,
+    totalPages: initialTotalPages,
   };
 
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } = useFetchInfinitePosts(

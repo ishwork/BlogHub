@@ -38,11 +38,11 @@ export const metadata: Metadata = {
 };
 
 const Home = async () => {
-  const { posts } = await getPaginatedBlogPosts({ start: 0, limit: 5 });
+  const { posts, totalPages } = await getPaginatedBlogPosts({ start: 0, limit: 5 });
 
   if (!posts) return notFound();
 
-  return <Frontpage initialPosts={posts} />;
+  return <Frontpage initialPosts={posts} initialTotalPages={totalPages} />;
 };
 
 export default Home;
