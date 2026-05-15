@@ -1,7 +1,7 @@
 import { BlogPost, PaginatedBlogPosts, PaginatedBlogPostParams } from '@/src/types';
 import { BlogPostSchema, PaginatedBlogPostParamsSchema } from '@/src/lib/schemas';
-
 import { client } from '@/src/lib/sanityClient';
+import { enrichBlogPost } from '@/src/lib/utils/enrichBlogPost';
 
 export const getPaginatedBlogPosts = async (
   params: PaginatedBlogPostParams,
@@ -24,7 +24,9 @@ export const getPaginatedBlogPosts = async (
     client.fetch(`count(*[_type == "blogPost"])`),
   ]);
 
-  const posts = BlogPostSchema.array().parse(rawPosts ?? []);
+  const posts = BlogPostSchema.array()
+    .parse(rawPosts ?? [])
+    .map(enrichBlogPost);
   const totalPages = Math.ceil((totalCount || 0) / limit) || 0;
 
   return { posts, totalPages };
@@ -45,5 +47,6 @@ export const getBlogPost = async (slug: string): Promise<BlogPost | null> => {
   const rawPost = await client.fetch(query);
   if (!rawPost) return null;
 
-  return BlogPostSchema.parse(rawPost);
+  const post = BlogPostSchema.parse(rawPost);
+  return enrichBlogPost(post);
 };

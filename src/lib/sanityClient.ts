@@ -1,9 +1,11 @@
+import 'server-only';
+
 import { createClient } from '@sanity/client';
 import { createImageUrlBuilder, type SanityImageSource } from '@sanity/image-url';
 
-const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID;
-const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET;
-const apiVersion = process.env.NEXT_PUBLIC_SANITY_API_VERSION;
+const projectId = process.env.SANITY_PROJECT_ID;
+const dataset = process.env.SANITY_DATASET;
+const apiVersion = process.env.SANITY_API_VERSION;
 
 export const client = createClient({
   projectId,

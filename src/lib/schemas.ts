@@ -24,6 +24,7 @@ export const ImageBodySchema = z.object({
   alt: z.string().nullish(),
   caption: z.string().nullish(),
   imageCredit: z.string().nullish(),
+  imageUrl: z.string().optional(),
 });
 
 export const BlogPostSchema = z.object({
@@ -34,6 +35,8 @@ export const BlogPostSchema = z.object({
   mainImage: z.object({
     asset: z.object({ _ref: z.string() }),
   }),
+  mainImageUrl: z.string().optional(),
+  mainImageOgUrl: z.string().optional(),
   imageCredit: z.string().nullish(),
   publishedAt: z.iso.datetime({ offset: true }),
   body: z.array(z.discriminatedUnion('_type', [BlockBodySchema, ImageBodySchema])),
