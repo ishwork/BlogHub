@@ -17,7 +17,7 @@ BlogHub is a clean, responsive blog platform built with Next.js and Sanity. It f
   - Error boundaries are handled through `error.tsx` and `not-found.tsx`.
 - **Data layer**
   - CMS fetch logic is centralized in `src/lib/fetchBlogpost.ts`.
-  - Sanity client and image URL builder are configured in `src/lib/sanityClient.ts`.
+  - Sanity client (`src/lib/sanityClient.ts`) fetches CMS data; image URLs are built in `src/lib/enrichBlogPost.ts`.
   - Server-side route handler `src/app/api/frontpage/route.ts` serves paginated frontpage data.
 - **State and fetching**
   - `QueryProvider` sets up TanStack Query globally.
@@ -78,9 +78,9 @@ Create a `.env.local` file with the following values:
 
 ```bash
 NEXT_PUBLIC_BASE_URL=https://blog-hub-web.vercel.app
-NEXT_PUBLIC_SANITY_PROJECT_ID=your_project_id
-NEXT_PUBLIC_SANITY_DATASET=your_dataset
-NEXT_PUBLIC_SANITY_API_VERSION=2024-01-01
+SANITY_PROJECT_ID=your_project_id
+SANITY_DATASET=your_dataset
+SANITY_API_VERSION=2024-01-01
 ```
 
 Run the development server:
