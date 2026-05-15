@@ -3,8 +3,6 @@ import { notFound } from 'next/navigation';
 
 import { FAVICON_ICON, BLOG_OG_IMAGE, SITE_URL } from '@/src/constants';
 import { getBlogPost } from '@/src/lib/fetchBlogpost';
-import { urlFor } from '@/src/lib/sanityClient';
-
 import BlogPostDetail from '@/src/components/BlogPostDetail';
 
 export const generateMetadata = async ({
@@ -34,7 +32,7 @@ export const generateMetadata = async ({
       type: 'article',
       images: [
         {
-          url: urlFor(post.mainImage.asset).url() || BLOG_OG_IMAGE,
+          url: post.mainImageOgUrl || BLOG_OG_IMAGE,
           width: 1200,
           height: 630,
           alt: post.title,

@@ -1,7 +1,5 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { urlFor } from '@/src/lib/sanityClient';
-
 import { BlogPost } from '@/src/types';
 
 type BlogCardProps = {
@@ -13,16 +11,15 @@ const BlogCard = ({ post, priority = false }: BlogCardProps) => {
   return (
     <Link href={`/blogs/${post.slug.current}`} className="group">
       <article className="bg-blog-background rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 h-full flex flex-col">
-        {post.mainImage && (
+        {post.mainImageUrl && (
           <div className="relative w-full aspect-video overflow-hidden">
             <Image
-              src={urlFor(post.mainImage).width(760).height(428).format('webp').url()}
+              src={post.mainImageUrl}
               alt={post.title}
               fill
               className="object-cover"
               sizes="(min-width: 640px) 100vw, 380px"
-              loading={priority ? 'eager' : 'lazy'}
-              fetchPriority={priority ? 'high' : undefined}
+              priority={priority}
             />
           </div>
         )}

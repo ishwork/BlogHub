@@ -2,7 +2,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import { BlogPost } from '@/src/types';
-import { urlFor } from '@/src/lib/sanityClient';
 import { getChildLinkDef, getChildStrongMark } from '@/src/lib/utils/bodyPartTextHandler';
 
 import ShareBlog from '@/src/components/ShareBlog';
@@ -43,16 +42,17 @@ const BlogPostDetail = ({ post }: BlogPostDetailProps) => (
       </header>
 
       {/* Featured Image */}
-      {post.mainImage && (
+      {post.mainImageUrl && (
         <div className="mb-6 flex flex-col items-center">
           <div className="relative w-full aspect-video overflow-hidden shadow-lg">
             <Image
-              src={urlFor(post.mainImage).width(760).height(428).format('webp').url()}
+              src={post.mainImageUrl}
               alt={post.title}
               fill
               className="object-cover"
               sizes="(min-width: 640px) 100vw, 380px"
               priority
+              loading="eager"
             />
           </div>
           {post.imageCredit && (
@@ -116,12 +116,12 @@ const BlogPostDetail = ({ post }: BlogPostDetailProps) => (
             }
 
             // Handle images within the body
-            if (block._type === 'image' && block.asset?._ref) {
+            if (block._type === 'image' && block.imageUrl) {
               return (
                 <figure key={index} className="my-6">
                   <div className="w-full rounded-lg overflow-hidden shadow-lg">
                     <Image
-                      src={urlFor(block).width(760).format('webp').url()}
+                      src={block.imageUrl}
                       alt={block.alt || post.title}
                       width={760}
                       height={428}
